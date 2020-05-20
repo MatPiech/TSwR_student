@@ -12,15 +12,15 @@ from trajectory_generators.poly3 import Poly3
 
 Tp = 0.01
 start = 0
-end = 3
+end = 10
 t = np.linspace(start, end, int((end - start) / Tp))
 manipulator = PlanarManipulator2DOF(Tp)
 
 """
 Switch to FeedbackLinearizationController as soon as you implement it
 """
-#controller = FeedbackLinearizationController(Tp)
-controller = DummyController(Tp)
+controller = FeedbackLinearizationController(Tp)
+# controller = DummyController(Tp)
 
 """
 Here you have some trajectory generators. You can use them to check your implementations.
