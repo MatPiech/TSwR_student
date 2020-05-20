@@ -12,7 +12,7 @@ from trajectory_generators.poly3 import Poly3
 
 Tp = 0.01
 start = 0
-end = 10
+end = 1
 t = np.linspace(start, end, int((end - start) / Tp))
 manipulator = PlanarManipulator2DOF(Tp)
 
@@ -26,8 +26,8 @@ controller = FeedbackLinearizationController(Tp)
 Here you have some trajectory generators. You can use them to check your implementations.
 At the end implement Point2point trajectory generator to move your manipulator to some desired state.
 """
-# traj_gen = ConstantTorque(np.array([0., 1.0])[:, np.newaxis])
-# traj_gen = Sinusoidal(np.array([0., 1.]), np.array([2., 2.]), np.array([0., 0.]))
+#traj_gen = ConstantTorque(np.array([0., 1.0])[:, np.newaxis])
+#traj_gen = Sinusoidal(np.array([0., 1.]), np.array([2., 2.]), np.array([0., 0.]))
 traj_gen = Poly3(np.array([0., 0.]), np.array([pi/4, pi/6]), end)
 
 
@@ -40,7 +40,7 @@ def system(x, t):
     T.append(t)
     q_d, q_d_dot, q_d_ddot = traj_gen.generate(t)
     Q_d.append(q_d)
-    print(q_d_ddot)
+    #print(q_d_ddot)
     control = controller.calculate_control(x, q_d_ddot[:, np.newaxis])
     ctrl.append(control)
     x_dot = manipulator.x_dot(x, control)
@@ -48,6 +48,7 @@ def system(x, t):
 
 
 q_d, q_d_dot, q_d_ddot = traj_gen.generate(0.)
+print([q_d, q_d_dot])
 x = odeint(system, np.concatenate([q_d, q_d_dot], 0), t)
 manipulator.plot(x)
 
