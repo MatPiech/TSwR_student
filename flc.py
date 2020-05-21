@@ -12,7 +12,7 @@ from trajectory_generators.poly3 import Poly3
 
 Tp = 0.01
 start = 0
-end = 1
+end = 3
 t = np.linspace(start, end, int((end - start) / Tp))
 manipulator = PlanarManipulator2DOF(Tp)
 
@@ -40,7 +40,7 @@ def system(x, t):
     T.append(t)
     q_d, q_d_dot, q_d_ddot = traj_gen.generate(t)
     Q_d.append(q_d)
-    #print(q_d_ddot)
+    print([q_d, q_d_dot])
     control = controller.calculate_control(x, q_d_ddot[:, np.newaxis])
     ctrl.append(control)
     x_dot = manipulator.x_dot(x, control)
