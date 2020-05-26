@@ -42,7 +42,7 @@ def system(x, t):
     Q_d.append(q_d)
     #print([q_d, q_d_dot])
     #control = controller.calculate_control(x, q_d_ddot[:, np.newaxis])
-    control = controller.calculate_control(x, q_d_ddot[:, np.newaxis], q_d, q_d_dot)
+    control = controller.calculate_control(x, q_d[:, np.newaxis], q_d_dot[:, np.newaxis], q_d_ddot[:, np.newaxis])
     ctrl.append(control)
     x_dot = manipulator.x_dot(x, control)
     return x_dot[:, 0]
