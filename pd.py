@@ -46,6 +46,7 @@ def system(x, t):
 
 q_d, q_d_dot, q_d_ddot = traj_gen.generate(0.)
 x = odeint(system, np.concatenate([q_d, q_d_dot], 0), t)
+print(x.shape)
 manipulator.plot(x)
 
 """
