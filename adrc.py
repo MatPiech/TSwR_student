@@ -18,18 +18,18 @@ end = 3
 t = np.linspace(start, end, int((end - start) / Tp))
 manipulator = PlanarManipulator2DOF(Tp)
 
-b_est_1 = 55.
-b_est_2 = 40.
-kp_1 = 0.01
-kp_2 = 25.
-kd_1 = 0.01
-kd_2 = 10.
+b_est_1 = 4.8 #55.
+b_est_2 = 2.1 #40.
+kp_1 = 55.0 #0.01
+kp_2 = 25.0 #25.
+kd_1 = 85.0 #0.01
+kd_2 = 60.0 #10.
 fl_controller = ADRController(b_est_1, kp_1, kd_1)
 sl_controller = ADRController(b_est_2, kp_2, kd_2)
 
-l1 = 1.
-l2 = 1.
-l3 = 1.
+l1 = 3*130 #1.
+l2 = 3*130**2 #1.
+l3 = 130**3 #1.
 A = np.array([[0., 1., 0.], [0., 0., 1.], [0., 0., 0.]])
 B1 = np.array([0., b_est_1, 0.])[:, np.newaxis]
 B2 = np.array([0., b_est_2, 0.])[:, np.newaxis]
